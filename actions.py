@@ -1,4 +1,5 @@
 import requests
+import datetime
 
 def get_swansoned():
 
@@ -53,5 +54,14 @@ def foaas(args):
         return "You broke the bot good job"
 
 
+def steam_chart():
+    url = "https://steamcharts.com/app/976730/chart-data.json"
+    response = requests.get(url)
+    data = response.json()
+
+    ts_epoch = data[-1][0]/1000 #fromtimestamp() method expects argument in seconds, but javascript uses milliseconds doi
+    ts = datetime.datetime.fromtimestamp(ts_epoch)
+    return ts.time(), data[-1][1]
+
 if __name__ == "__main__":
-    foaas()
+    steam_chart()

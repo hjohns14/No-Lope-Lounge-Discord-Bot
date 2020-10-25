@@ -3,7 +3,7 @@ import discord
 from dotenv import load_dotenv
 from actions import (get_swansoned, cat_me,
                     random_cat, random_dog,
-                    random_chuck, foaas)
+                    random_chuck, foaas, steam_chart)
 
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
@@ -39,6 +39,10 @@ async def on_message(message):
 
     if message.content.lower() == "?chuck":
         await message.channel.send(random_chuck())
+
+    if message.content.lower() == "?pop":
+        current_time, population = steam_chart()
+        await message.channel.send(f"```Current Time: {current_time}\nPlayers Online: {population}```")
 
     if "?foaas" in message.content.lower():
         args = message.content.lower().split(" ")
