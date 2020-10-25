@@ -50,27 +50,20 @@ async def on_message(message):
         args.append(message.author.name)
         await message.channel.send(foaas(args))
 
-    if "?report" == message.content.lower() and message.guild == doink_dojo:
-        #print("pass")
+    if "?stats" == message.content.lower() and message.guild == doink_dojo:
         online = 0
         offline = 0
         idle = 0
-        #print("pass")
 
         
         for m in doink_dojo.members:
-            #print("start_loop")
-            #print(m.status)
             if str(m.status) == "online":
                 online += 1
             elif str(m.status) == "offline":
                 offline += 1
             else: 
                 idle += 1
-
-        #print("pass")
-
-        #print(online, offline, idle)
+                
         await message.channel.send(f"```Online: {online}\nOffline: {offline}\nAway: {idle}```")
 
     elif message.content.lower() == "bot.logout()":
